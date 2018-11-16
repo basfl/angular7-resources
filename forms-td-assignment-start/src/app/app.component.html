@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <!-- Add a Form with the following Inputs (and Validators)
+           1) Mail address (should not be empty and should be an email address)
+           2) A Dropdown which allows the user to select from three different Subscriptions ("Basic", "Advanced", "Pro")
+              Set "Advanced" as Default
+           3) A Password field (should not be empty)
+           4) A Submit Button
+
+           Display a warning message if the Form is invalid AND was touched. Display a warning message below each input if it's invalid.
+
+           Upon submitting the form, you should simply print the Value of the Form to the Console.
+           Optionally, display it in your template.
+      -->
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+    <form (ngSubmit)="onSubmit()" #f="ngForm">
+      <div class="form-group">
+        <label for="email">email</label>
+        <input type="email" id="email" ngModel name="email" required email class="form-control" #email="ngModel">
+        <p *ngIf="!email.valid&& email.touched">please enter the valid email</p>
+        <label for="pass">password</label>
+        <input type="password" name="pass" id="pass" required ngModel class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="subscriptions">Subscriptions</label>
+        <select id="subscriptions" class="form-control" [ngModel]="defaultSubscriptions" name="subscriptions">
+          <option value="basic">Basic?</option>
+          <option value="advance">Advance?</option>
+          <option value="pro">Pro?</option>
+        </select>
+      </div>
+      <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Submit</button>
+      <p *ngIf="!f.valid&& f.touched">Please select </p>
+    </form>
+  </div>
+  <div class="row" *ngIf="submitted">
+    <div class="col-xs-12">
+
+      <p>your input is </p>
+      <p>email:{{submitedInput.email}} </p>
+      <p>pass: {{submitedInput.pass}}</p>
+      <p>subscriptions: {{submitedInput.subscriptions}}</p>
+    </div>
+  </div>
+
+
+
+</div>
